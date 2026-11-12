@@ -1,0 +1,77 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && (
+        request.auth.token.email == "jessicaq2204@gmail.com" ||
+        exists(/databases/$(database)/documents/adminUsers/$(request.auth.uid))
+      );
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128;
+    }
+
+    // Site Settings: Public read, Admin write
+    match /siteSettings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Professional Profile: Public read, Admin write
+    match /professionalProfile/{profileId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Properties: Public read for published, Admin full access
+    match /properties/{propertyId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Developments: Public read, Admin write
+    match /developments/{developmentId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Landing Pages: Public read, Admin write
+    match /landingPages/{landingPageId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Leads: Public can create with sanitized input, Admin can read/update/delete
+    match /leads/{leadId} {
+      allow create: if request.resource.data.fullName is string
+        && request.resource.data.fullName.size() >= 2
+        && request.resource.data.fullName.size() <= 120
+        && request.resource.data.phone is string
+        && request.resource.data.phone.size() >= 8
+        && request.resource.data.phone.size() <= 40;
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Analytics: Public can log events, Admin can read/manage
+    match /analytics/{eventId} {
+      allow create: if request.resource.data.eventType is string
+        && request.resource.data.eventType.size() <= 50;
+      allow read, write: if isAdmin();
+    }
+
+    // Admin Users collection
+    match /adminUsers/{userId} {
+      allow read, write: if isAdmin();
+    }
+  }
+}

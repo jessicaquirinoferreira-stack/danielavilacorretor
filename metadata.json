@@ -1,0 +1,8 @@
+{
+  "name": "Gil Avila Daniel | Corretor de Imóveis",
+  "description": "Site institucional e imobiliário premium de Gil Avila Daniel, corretor de imóveis especialista na Zona Sul de São Paulo com mais de 20 anos de experiência.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

@@ -1,0 +1,195 @@
+{
+  "entities": {
+    "SiteSettings": {
+      "title": "SiteSettings",
+      "description": "Configurações gerais do site institucional imobiliário",
+      "type": "object",
+      "properties": {
+        "siteName": { "type": "string", "maxLength": 100 },
+        "creci": { "type": "string", "maxLength": 50 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "whatsapp": { "type": "string", "maxLength": 30 },
+        "instagram": { "type": "string", "maxLength": 100 },
+        "threads": { "type": "string", "maxLength": 100 },
+        "email": { "type": "string", "maxLength": 120 },
+        "primaryColor": { "type": "string", "maxLength": 30 },
+        "secondaryColor": { "type": "string", "maxLength": 30 },
+        "heroTitle": { "type": "string", "maxLength": 200 },
+        "heroSubtitle": { "type": "string", "maxLength": 500 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      }
+    },
+    "ProfessionalProfile": {
+      "title": "ProfessionalProfile",
+      "description": "Perfil profissional de Gil Avila Daniel",
+      "type": "object",
+      "properties": {
+        "fullName": { "type": "string", "maxLength": 100 },
+        "role": { "type": "string", "maxLength": 100 },
+        "experienceYears": { "type": "number" },
+        "specialtyRegion": { "type": "string", "maxLength": 150 },
+        "bio": { "type": "string", "maxLength": 2000 },
+        "photoUrl": { "type": "string", "maxLength": 1000 },
+        "instagram": { "type": "string", "maxLength": 100 },
+        "whatsapp": { "type": "string", "maxLength": 30 }
+      }
+    },
+    "Property": {
+      "title": "Property",
+      "description": "Imóvel para venda ou locação",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "slug": { "type": "string", "maxLength": 200 },
+        "code": { "type": "string", "maxLength": 50 },
+        "type": { "type": "string", "maxLength": 50 },
+        "transactionType": { "type": "string", "enum": ["venda", "locacao", "ambos"] },
+        "price": { "type": "number" },
+        "rentalPrice": { "type": "number" },
+        "condoFee": { "type": "number" },
+        "iptu": { "type": "number" },
+        "neighborhood": { "type": "string", "maxLength": 100 },
+        "city": { "type": "string", "maxLength": 100 },
+        "state": { "type": "string", "maxLength": 10 },
+        "privateAddress": { "type": "string", "maxLength": 300 },
+        "usableArea": { "type": "number" },
+        "totalArea": { "type": "number" },
+        "bedrooms": { "type": "number" },
+        "suites": { "type": "number" },
+        "bathrooms": { "type": "number" },
+        "parkingSpots": { "type": "number" },
+        "description": { "type": "string", "maxLength": 5000 },
+        "features": { "type": "string", "maxLength": 2000 },
+        "status": { "type": "string", "enum": ["pendente_confirmacao", "disponivel", "reservado", "vendido", "alugado"] },
+        "isFeatured": { "type": "boolean" },
+        "isPublished": { "type": "boolean" },
+        "coverImage": { "type": "string", "maxLength": 1000 },
+        "mediaUrls": { "type": "string", "maxLength": 10000 },
+        "videoUrls": { "type": "string", "maxLength": 5000 },
+        "developmentId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "string", "maxLength": 50 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["title", "slug", "transactionType", "price", "neighborhood", "city"]
+    },
+    "Development": {
+      "title": "Development",
+      "description": "Empreendimento imobiliário residencial ou comercial",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 200 },
+        "slug": { "type": "string", "maxLength": 200 },
+        "code": { "type": "string", "maxLength": 50 },
+        "neighborhood": { "type": "string", "maxLength": 100 },
+        "city": { "type": "string", "maxLength": 100 },
+        "status": { "type": "string", "enum": ["lancamento", "em_obras", "pronto", "pendente_confirmacao"] },
+        "minArea": { "type": "number" },
+        "maxArea": { "type": "number" },
+        "minBedrooms": { "type": "number" },
+        "maxBedrooms": { "type": "number" },
+        "description": { "type": "string", "maxLength": 5000 },
+        "features": { "type": "string", "maxLength": 2000 },
+        "coverImage": { "type": "string", "maxLength": 1000 },
+        "mediaUrls": { "type": "string", "maxLength": 10000 },
+        "unitsCount": { "type": "number" },
+        "isFeatured": { "type": "boolean" },
+        "isPublished": { "type": "boolean" },
+        "createdAt": { "type": "string", "maxLength": 50 },
+        "updatedAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["name", "slug", "neighborhood", "city"]
+    },
+    "Lead": {
+      "title": "Lead",
+      "description": "Lead capturado através do formulário ou agendamento de visita",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "fullName": { "type": "string", "maxLength": 120 },
+        "phone": { "type": "string", "maxLength": 40 },
+        "email": { "type": "string", "maxLength": 120 },
+        "interestType": { "type": "string", "maxLength": 50 },
+        "propertyId": { "type": "string", "maxLength": 128 },
+        "propertyTitle": { "type": "string", "maxLength": 200 },
+        "preferredDate": { "type": "string", "maxLength": 50 },
+        "preferredTime": { "type": "string", "maxLength": 50 },
+        "message": { "type": "string", "maxLength": 2000 },
+        "origin": { "type": "string", "maxLength": 100 },
+        "utmSource": { "type": "string", "maxLength": 100 },
+        "utmMedium": { "type": "string", "maxLength": 100 },
+        "utmCampaign": { "type": "string", "maxLength": 100 },
+        "status": { "type": "string", "enum": ["novo", "em_atendimento", "visita_agendada", "convertido", "descartado"] },
+        "internalNotes": { "type": "string", "maxLength": 3000 },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["fullName", "phone"]
+    },
+    "LandingPage": {
+      "title": "LandingPage",
+      "description": "Página de aterrissagem para campanhas de marketing",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 200 },
+        "slug": { "type": "string", "maxLength": 200 },
+        "headline": { "type": "string", "maxLength": 300 },
+        "subheadline": { "type": "string", "maxLength": 500 },
+        "propertyId": { "type": "string", "maxLength": 128 },
+        "coverImage": { "type": "string", "maxLength": 1000 },
+        "mediaUrls": { "type": "string", "maxLength": 10000 },
+        "ctaText": { "type": "string", "maxLength": 100 },
+        "customWhatsAppMessage": { "type": "string", "maxLength": 500 },
+        "isPublished": { "type": "boolean" },
+        "viewCount": { "type": "number" },
+        "leadCount": { "type": "number" },
+        "createdAt": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["title", "slug"]
+    },
+    "AnalyticsEvent": {
+      "title": "AnalyticsEvent",
+      "description": "Registro de eventos de acesso, clique em WhatsApp e visualização",
+      "type": "object",
+      "properties": {
+        "eventType": { "type": "string", "maxLength": 50 },
+        "targetId": { "type": "string", "maxLength": 128 },
+        "targetType": { "type": "string", "maxLength": 50 },
+        "userAgent": { "type": "string", "maxLength": 300 },
+        "timestamp": { "type": "string", "maxLength": 50 }
+      },
+      "required": ["eventType"]
+    }
+  },
+  "firestore": {
+    "/siteSettings/{settingId}": {
+      "schema": { "$ref": "SiteSettings" },
+      "description": "Configurações institucionais do site"
+    },
+    "/professionalProfile/{profileId}": {
+      "schema": { "$ref": "ProfessionalProfile" },
+      "description": "Perfil profissional do corretor Gil Avila Daniel"
+    },
+    "/properties/{propertyId}": {
+      "schema": { "$ref": "Property" },
+      "description": "Imóveis à venda e locação cadastrados"
+    },
+    "/developments/{developmentId}": {
+      "schema": { "$ref": "Development" },
+      "description": "Empreendimentos residenciais e comerciais"
+    },
+    "/leads/{leadId}": {
+      "schema": { "$ref": "Lead" },
+      "description": "Leads e contatos recebidos através do site"
+    },
+    "/landingPages/{landingPageId}": {
+      "schema": { "$ref": "LandingPage" },
+      "description": "Páginas de campanha com links compartilháveis"
+    },
+    "/analytics/{eventId}": {
+      "schema": { "$ref": "AnalyticsEvent" },
+      "description": "Métricas de cliques e conversões"
+    }
+  }
+}
